@@ -8,4 +8,7 @@
 .item{
     color:gray;
     text-align: center;
+    font-size: 44px;
+    line-height: 65px;
+    letter-spacing: 6px;
 }
