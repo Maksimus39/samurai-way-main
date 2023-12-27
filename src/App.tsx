@@ -14,18 +14,18 @@ import {Settings} from "./components/Settings/Settings";
 const App = () => {
     return (
         <BrowserRouter>
-        <div className="App-wrapper">
-            <Header/>
-            <Navbar/>
+            <div className="App-wrapper">
+                <Header/>
+                <Navbar/>
 
-            <div className={classes.content}>
-                <Route path="/dialogs" component={Dialogs}/>
-                <Route path="/profile" component={Profile}/>
-                <Route path="/news" component={News}/>
-                <Route path="/musik" component={Music}/>
-                <Route path="/settings" component={Settings}/>
+                <div className={classes.content}>
+                    <Route path="/dialogs" component={Dialogs}/>
+                    <Route path="/profile" component={Profile}/>
+                    <Route path="/news" component={News}/>
+                    <Route path="/musik" component={Music}/>
+                    <Route path="/settings" component={Settings}/>
+                </div>
             </div>
-        </div>
         </BrowserRouter>
     );
 }

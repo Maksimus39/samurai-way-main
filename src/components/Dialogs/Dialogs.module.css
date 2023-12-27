@@ -8,4 +8,28 @@
 
 }
 
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    text-align: start;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: bold;
+    color: aquamarine;
+}
 
+.dialogsItems {
+    padding: 20px;
+}
+
+.dialogsItems .active{
+    color: brown;
+}
+
+.messages {
+    padding: 20px;
+}
+
+.messages.message {
+
+}
