@@ -2,13 +2,19 @@
     grid-area: n;
     background-color: aquamarine;
     border-radius: 45px;
-    height: 1000px;
+    height: 925px;
+    padding: 40px;
 }
 
-.item{
-    color:gray;
+.item a {
+    color: gray;
     text-align: center;
-    font-size: 44px;
-    line-height: 65px;
-    letter-spacing: 6px;
+    font-size: 40px;
+    line-height: 50px;
+    letter-spacing: 4px;
+    text-decoration: none;
+}
+
+.item a.activeLink {
+    color: brown;
 }
