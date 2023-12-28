@@ -7,23 +7,45 @@ export const Dialogs = () => {
 
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
-                <div className={classes.dialog + " " + classes.active}>
-                     <NavLink to="/dialogs/1">Max</NavLink>
-                </div>
-                <div className={classes.dialog}>
-                   <NavLink to="/dialogs/2">Sergey</NavLink>
-                </div>
-                <div className={classes.dialog}>
-                  <NavLink to="/dialogs/3">Aleksandr</NavLink>
-                </div>
+
+                <DialogItem name="Max" id="1"/>
+                <DialogItem name="Sergey" id="2"/>
+                <DialogItem name="Aleksandr" id="3"/>
+
             </div>
-
-
             <div className={classes.messages}>
-                <div className={classes.message}>Hi</div>
-                <div className={classes.message}>Good buy</div>
-                <div className={classes.message}>Start</div>
+
+                <Message message="Hi"/>
+                <Message message="Good buy"/>
+                <Message message="Start"/>
+
             </div>
         </div>
+    )
+}
+
+
+type DialogItemPropsType = {
+    id: string
+    name: string
+}
+const DialogItem = (props: DialogItemPropsType) => {
+
+    let path = "/dialogs" + props.id
+
+    return (
+        <div className={classes.dialog + " " + classes.active}>
+            <NavLink to={path}>{props.name}</NavLink>
+        </div>
+    )
+}
+
+
+type MessagePropsType = {
+    message: string
+}
+const Message = (props: MessagePropsType) => {
+    return (
+        <div className={classes.message}>{props.message}</div>
     )
 }
