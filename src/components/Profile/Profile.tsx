@@ -13,7 +13,7 @@ type ProfilePostsType={
     posts:PostsType[]
 }
 
-export const Profile = (props:ProfilePostsType) => {
+export const Profile:React.FC<ProfilePostsType> = (props) => {
 
     return (
         <div>

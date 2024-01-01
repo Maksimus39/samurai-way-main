@@ -6,7 +6,7 @@ type PostPropsType={
     message: string
     LikesCounts:number
 }
-export const Post = (props:PostPropsType) => {
+export const Post:React.FC<PostPropsType> = (props) => {
     return (
         <div className={classes.dialog}>
             <img

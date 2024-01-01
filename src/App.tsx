@@ -9,35 +9,19 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
+import {RootStateType} from "./components/redux/state";
 
 
-// типы для profile
-type PostsType = {
-    id: number
-    messages: string
-    LikesCounts: number
-}
 
-// типы для Dialogs
-type DialogsType = {
-    id: string
-    name: string
-}
-
-// типы для messages
-type MessagesType = {
-    id: number
-    message: string
-}
 
 // типы для props
 type AppPropsType = {
-    posts: PostsType[]
-    dialogs: DialogsType[]
-    messages: MessagesType[]
+    appState: RootStateType
 }
 
-const App = (props: AppPropsType) => {
+
+const App: React.FC<AppPropsType> = (props) => {
+
 
     return (
         <BrowserRouter>
@@ -46,8 +30,11 @@ const App = (props: AppPropsType) => {
                 <Navbar/>
 
                 <div className={classes.content}>
-                    <Route path="/dialogs" render={() => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
-                    <Route path="/profile" render={() => <Profile posts={props.posts}/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs
+                        dialogs={props.appState.dialogsPage.dialogs}
+                        messages={props.appState.dialogsPage.messages}/>}/>
+                    <Route path="/profile" render={() => <Profile
+                        posts={props.appState.profilePage.posts}/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/musik" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

@@ -20,7 +20,7 @@ type DialogsPropsType = {
     messages: MessagesType[]
 }
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs:React.FC<DialogsPropsType> = (props) => {
 
     let dialogsElements = props.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
     let messagesElements = props.messages.map((m) => <Message message={m.message}/>)
@@ -43,7 +43,7 @@ type DialogItemPropsType = {
     id: string
     name: string
 }
-const DialogItem = (props: DialogItemPropsType) => {
+const DialogItem:React.FC<DialogItemPropsType> = (props) => {
 
     let path = "/dialogs/" + props.id
 
