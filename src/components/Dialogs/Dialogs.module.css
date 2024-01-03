@@ -10,8 +10,9 @@
 
 .dialogs {
     display: grid;
-    grid-template-columns: 2fr 10fr;
-    text-align: start;
+    grid-template-columns: 3fr 10fr;
+
+    text-align: left;
     font-size: 20px;
     line-height: 30px;
     letter-spacing: 2px;
@@ -34,4 +35,11 @@
 
 .messages.message {
  color: white;
+}
+
+.dialog img {
+    width: 70px;
+    height: 70px;
+    border-radius: 45px;
+
 }

@@ -49,6 +49,9 @@ const DialogItem:React.FC<DialogItemPropsType> = (props) => {
 
     return (
         <div className={classes.dialog + " " + classes.active}>
+            <img
+                src="https://avatars.mds.yandex.net/i?id=3365798b95c3dc4450aefe6b102bec2c4a4b8a63-8981283-images-thumbs&n=13"
+                alt="портрет"/>
             <NavLink to={path}>{props.name}</NavLink>
         </div>
     )
@@ -60,6 +63,11 @@ type MessagePropsType = {
 }
 const Message = (props: MessagePropsType) => {
     return (
-        <div className={classes.dialogs}>{props.message}</div>
+        <ul>
+            <li>
+                <div className={classes.dialogs}>{props.message}</div>
+            </li>
+        </ul>
+
     )
 }
