@@ -19,12 +19,9 @@ type AppPropsType = {
     appState: RootStateType
 }
 
-
 const App: React.FC<AppPropsType> = (props) => {
 
-
     return (
-        <BrowserRouter>
             <div className="App-wrapper">
                 <Header/>
                 <Navbar/>
@@ -35,12 +32,13 @@ const App: React.FC<AppPropsType> = (props) => {
                         messages={props.appState.dialogsPage.messages}/>}/>
                     <Route path="/profile" render={() => <Profile
                         posts={props.appState.profilePage.posts}/>}/>
+
+
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/musik" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
                 </div>
             </div>
-        </BrowserRouter>
     );
 }
 export default App;
