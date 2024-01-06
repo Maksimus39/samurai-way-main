@@ -3,19 +3,18 @@ import classes from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 
 
-
-
-type PostsType={
-    id:number
-    messages:string
-    LikesCounts:number
+type PostsType = {
+    id: number
+    messages: string
+    LikesCounts: number
 }
 
-type MyPostsPropsType={
-    posts:PostsType[]
+type MyPostsPropsType = {
+    posts: PostsType[]
+    addPost: (postMessage: string) => void
 }
 
-export const MyPosts:React.FC<MyPostsPropsType> = (props) => {
+export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     let postsElement = props.posts.map(p => <Post message={p.messages} LikesCounts={p.LikesCounts}/>)
 
@@ -23,8 +22,10 @@ export const MyPosts:React.FC<MyPostsPropsType> = (props) => {
     let newPostEl = useRef<HTMLTextAreaElement>(null)
     // function button onClick
     const addPost = () => {
-        if (newPostEl.current !== null) {
-            alert(newPostEl.current.value)
+        let text = newPostEl?.current?.value
+        props.addPost(text ? text : "")
+        if (newPostEl.current) {
+            newPostEl.current.value = ""
         }
     }
 

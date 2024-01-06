@@ -13,6 +13,7 @@
     line-height: 50px;
     letter-spacing: 4px;
     text-decoration: none;
+    width: auto;
 }
 
 .activeLink {

@@ -1,6 +1,8 @@
 // сейчас мы тут будем производить типизацию state
 
 // тип для messages
+import {rerenderEntireTre} from "../../render";
+
 type MessageType = {
     id: number
     message: string
@@ -67,3 +69,18 @@ export let state: RootStateType = {
     },
     sidebar: {}
 }
+
+// реализация добавления users на стену
+export let addPost = (postMessage: string) => {
+
+    // создание нового поста
+    let newPost = {
+        id: 5,
+        messages: postMessage,
+        LikesCounts: 0
+    }
+    // добавление нового поста в state
+    state.profilePage.posts.push(newPost)
+    rerenderEntireTre(state)
+}
+

@@ -46,7 +46,7 @@ export const Dialogs:React.FC<DialogsPropsType> = (props) => {
             <div className={classes.messages}>
                 {messagesElements}
 
-                // отображение сообщений
+
                 <div>
                     <textarea ref={newPostEl}></textarea>
                 </div>
