@@ -5,19 +5,18 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {RootStateType} from "./components/redux/state";
 
 
-
-
 // типы для props
 type AppPropsType = {
     appState: RootStateType
-    addPost:(postMessage: string)=>void
+    addPost:()=>void
+    updateNewPostText:(newText: string)=>void
 }
 
 const App: React.FC<AppPropsType> = (props) => {
@@ -34,9 +33,9 @@ const App: React.FC<AppPropsType> = (props) => {
 
 
                     <Route path="/profile" render={() => <Profile
-                        posts={props.appState.profilePage.posts}
+                        profilePage={props.appState.profilePage}
                         addPost={props.addPost}
-
+                        updateNewPostText={props.updateNewPostText}
 
                     />}/>
 

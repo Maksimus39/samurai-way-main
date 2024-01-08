@@ -11,7 +11,9 @@ type PostsType = {
 
 type MyPostsPropsType = {
     posts: PostsType[]
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    newPostText: string
+    updateNewPostText:(newText: string)=>void
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
@@ -20,14 +22,20 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
 
     let newPostEl = useRef<HTMLTextAreaElement>(null)
+
+
     // function button onClick
     const addPost = () => {
-        let text = newPostEl?.current?.value
-        props.addPost(text ? text : "")
-        if (newPostEl.current) {
-            newPostEl.current.value = ""
-        }
+        props.addPost()
     }
+
+    // function add input
+    let onPostChange = () => {
+        let text = newPostEl?.current?.value
+        console.log(text)
+        props.updateNewPostText(text ? text : "")
+    }
+
 
     return (
         <div className={classes.postsBlock}>
@@ -38,7 +46,10 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
             <div>
                 <div>
-                    <textarea ref={newPostEl}></textarea>
+                    <textarea
+                        onChange={onPostChange}
+                        ref={newPostEl}
+                        value={props.newPostText}/>
                 </div>
 
                 <div>

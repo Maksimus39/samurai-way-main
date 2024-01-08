@@ -1,7 +1,10 @@
+let rerenderEntireTree = (state: RootStateType) => {
+    console.log("state")
+}
+
 // сейчас мы тут будем производить типизацию state
 
 // тип для messages
-import {rerenderEntireTre} from "../../render";
 
 type MessageType = {
     id: number
@@ -28,8 +31,9 @@ type PostType = {
 }
 
 // тип для profilePage
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: PostType[]
+    newPostText: string
 }
 
 // тип для sidebar
@@ -48,7 +52,8 @@ export let state: RootStateType = {
         posts: [
             {id: 1, messages: "I am a champion in weightlifting", LikesCounts: 15},
             {id: 2, messages: "Ha, hold my beer!", LikesCounts: 20}
-        ]
+        ],
+        newPostText: " "
     },
     dialogsPage: {
         dialogs: [
@@ -71,16 +76,41 @@ export let state: RootStateType = {
 }
 
 // реализация добавления users на стену
-export let addPost = (postMessage: string) => {
+export const addPost = () => {
 
     // создание нового поста
     let newPost = {
         id: 5,
-        messages: postMessage,
+        messages: state.profilePage.newPostText,
         LikesCounts: 0
     }
     // добавление нового поста в state
     state.profilePage.posts.push(newPost)
-    rerenderEntireTre(state)
+    state.profilePage.newPostText=" "
+    rerenderEntireTree(state)
 }
+
+
+// реализация добавления users на стену
+export const updateNewPostText = (newText: string) => {
+
+    // добавление нового поста в state
+    state.profilePage.newPostText = newText
+    rerenderEntireTree(state)
+}
+
+// перерисовка коллбеком
+
+
+type Observer = (arg: any) => void;
+
+type SubscribeFunction = (observer: Observer) => void;
+
+export const subscribe: SubscribeFunction = (observer) => {
+    rerenderEntireTree = observer;
+};
+
+// export const subscribe = (observer: any) => {
+//     rerenderEntireTre = observer
+// }
 

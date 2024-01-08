@@ -1,17 +1,13 @@
 import React from "react";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {ProfilePageType} from "../redux/state";
 
-
-type PostsType={
-    id:number
-    messages:string
-    LikesCounts:number
-}
 
 type ProfilePostsType={
-    posts:PostsType[]
-    addPost:(postMessage: string)=>void
+    profilePage:ProfilePageType
+    addPost:()=>void
+    updateNewPostText:(newText: string)=>void
 }
 
 export const Profile:React.FC<ProfilePostsType> = (props) => {
@@ -20,7 +16,9 @@ export const Profile:React.FC<ProfilePostsType> = (props) => {
         <div>
             <ProfileInfo/>
             <MyPosts
-                posts={props.posts}
+                posts={props.profilePage.posts}
+                newPostText={props.profilePage.newPostText}
+                updateNewPostText={props.updateNewPostText}
                 addPost={props.addPost}
             />
         </div>
