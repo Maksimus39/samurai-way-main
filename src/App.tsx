@@ -9,42 +9,40 @@ import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {RootStateType} from "./components/redux/state";
+import {StoreType} from "./components/redux/state";
 
 
 // типы для props
 type AppPropsType = {
-    appState: RootStateType
-    addPost:()=>void
-    updateNewPostText:(newText: string)=>void
+    store: StoreType
 }
 
 const App: React.FC<AppPropsType> = (props) => {
 
     return (
-            <div className="App-wrapper">
-                <Header/>
-                <Navbar/>
+        <div className="App-wrapper">
+            <Header/>
+            <Navbar/>
 
-                <div className={classes.content}>
-                    <Route path="/dialogs" render={() => <Dialogs
-                        dialogs={props.appState.dialogsPage.dialogs}
-                        messages={props.appState.dialogsPage.messages}/>}/>
-
-
-                    <Route path="/profile" render={() => <Profile
-                        profilePage={props.appState.profilePage}
-                        addPost={props.addPost}
-                        updateNewPostText={props.updateNewPostText}
-
-                    />}/>
+            <div className={classes.content}>
+                <Route path="/dialogs" render={() => <Dialogs
+                    dialogs={props.store._state.dialogsPage.dialogs}
+                    messages={props.store._state.dialogsPage.messages}/>}/>
 
 
-                    <Route path="/news" render={() => <News/>}/>
-                    <Route path="/musik" render={() => <Music/>}/>
-                    <Route path="/settings" render={() => <Settings/>}/>
-                </div>
+                <Route path="/profile" render={() => <Profile
+                    profilePage={props.store._state.profilePage}
+                    addPost={props.store.addPost.bind(props.store)}
+                    updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+
+                />}/>
+
+
+                <Route path="/news" render={() => <News/>}/>
+                <Route path="/musik" render={() => <Music/>}/>
+                <Route path="/settings" render={() => <Settings/>}/>
             </div>
+        </div>
     );
 }
 export default App;
