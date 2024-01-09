@@ -1,3 +1,4 @@
+// --------------------------------------------------------------------------
 // сейчас мы тут будем производить типизацию state
 // тип для messages
 type MessageType = {
@@ -34,16 +35,32 @@ export type RootStateType = {
     sidebar: SideBarType
 }
 
-
+// ---------------------------------------------------------------------------
 // типизация объекта store
 export type StoreType = {
     _state: RootStateType
-    updateNewPostText: (newText: string) => void
-    addPost: () => void
     _rerenderEntireTree: () => void
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
+    dispatch: (action: DispatchActionType) => void
 }
+
+// -----------------------------------------------------------------------------
+// написание типов для метода dispatch
+type AddPostActionType = {
+    type: "ADD-POST",
+    newPostText: string
+}
+
+type UpdateNewPostTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT",
+    newText: string
+}
+
+// название общего типа для метода dispatch
+export type DispatchActionType = AddPostActionType | UpdateNewPostTextActionType
+
+// ------------------------------------------------------------------------------
 
 
 // создание объекта store
@@ -75,40 +92,36 @@ export let store: StoreType = {
         },
         sidebar: {}
     },
-
-    // реализация добавления users на стену
-    updateNewPostText(newText: string) {
-
-        // добавление нового поста в state
-        this._state.profilePage.newPostText = newText
-        this._rerenderEntireTree()
-    },
-
-    // реализация добавления users на стену
-    addPost() {
-
-        // создание нового поста
-        let newPost = {
-            id: 5,
-            messages: this._state.profilePage.newPostText,
-            LikesCounts: 0
-        }
-        // добавление нового поста в state
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = " "
-        this._rerenderEntireTree()
-    },
-
     // перерисовка коллбеком
     _rerenderEntireTree() {
         console.log("state")
     },
 
+    getState() {
+        return this._state
+    },
     subscribe(observer) {
         this._rerenderEntireTree = observer;
     },
 
-    getState() {
-        return this._state
+    // написание реализации метода dispatch
+    dispatch(action) {  // { type: "ADD-POST"}
+        if (action.type === "ADD-POST") {
+            // // создание нового поста
+            let newPost = {
+                id: 5,
+                messages: action.newPostText,
+                LikesCounts: 0
+            }
+            // добавление нового поста в state
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = " "
+            this._rerenderEntireTree()
+
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            // добавление нового поста в state
+            this._state.profilePage.newPostText = action.newText
+            this._rerenderEntireTree()
+        }
     }
 }

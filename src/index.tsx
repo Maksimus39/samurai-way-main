@@ -9,7 +9,9 @@ import React from "react";
 export const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App store={store}/>,
+            <App
+                store={store}
+            />,
         </BrowserRouter>, document.getElementById('root')
     );
 }
