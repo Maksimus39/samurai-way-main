@@ -46,21 +46,45 @@ export type StoreType = {
 }
 
 // -----------------------------------------------------------------------------
-// написание типов для метода dispatch
-type AddPostActionType = {
-    type: "ADD-POST",
-    newPostText: string
-}
-
-type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT",
-    newText: string
-}
-
 // название общего типа для метода dispatch
-export type DispatchActionType = AddPostActionType | UpdateNewPostTextActionType
+export type DispatchActionType =
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof updateNewPostTextActionCreator>
 
-// ------------------------------------------------------------------------------
+// написание типов для метода dispatch
+// type AddPostActionType = {
+//     type: "ADD-POST",
+//     newPostText: string
+// }
+
+// type UpdateNewPostTextActionType = {
+//     type: "UPDATE-NEW-POST-TEXT",
+//     newText: string
+// }
+
+// // 1
+// type AddPostActionType = ReturnType<typeof addPostActionCreator>
+//
+// // 2
+// type UpdateNewPostTextActionType =ReturnType<typeof updateNewPostTextActionCreator>
+// // ------------------------------------------------------------------------------
+
+// создание ActionCreator -------------------------------------------------------------------------------
+export const addPostActionCreator = (newPostText: string) => {
+    return {
+        type: "ADD-POST",
+        newPostText: newPostText
+    } as const
+}
+export let updateNewPostTextActionCreator = (newText: string) => {
+    return {
+        type: "UPDATE-NEW-POST-TEXT",
+        newText: newText
+    } as const
+}
+
+
+// ----------------------------------------------------------------------------------------------------
 
 
 // создание объекта store
@@ -92,7 +116,7 @@ export let store: StoreType = {
         },
         sidebar: {}
     },
-    // перерисовка коллбеком
+    // перерисовка callback
     _rerenderEntireTree() {
         console.log("state")
     },
