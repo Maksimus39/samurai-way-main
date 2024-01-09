@@ -26,8 +26,8 @@ const App: React.FC<AppPropsType> = (props) => {
 
             <div className={classes.content}>
                 <Route path="/dialogs" render={() => <Dialogs
-                    dialogs={props.store._state.dialogsPage.dialogs}
-                    messages={props.store._state.dialogsPage.messages}/>}/>
+                    store={props.store}
+                />}/>
 
                 <Route path="/profile" render={() => <Profile
                     profilePage={props.store._state.profilePage}

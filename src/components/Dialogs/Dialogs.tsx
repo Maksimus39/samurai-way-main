@@ -1,39 +1,46 @@
-import React, {useRef} from "react";
+import React, {ChangeEvent, useRef} from "react";
 import classes from "./Dialogs.module.css"
 import {NavLink} from "react-router-dom";
+import {sendMessageActionCreator, StoreType, updateNewMessageBodyActionCreator} from "../redux/state";
 
 
-// типы для Dialogs
-type DialogsType = {
-    id: string
-    name: string
-}
+// // типы для Dialogs
+// type DialogsType = {
+//     id: string
+//     name: string
+// }
+//
+// // типы для messages
+// type MessagesType = {
+//     id: number
+//     message: string
+// }
 
-// типы для messages
-type MessagesType = {
-    id: number
-    message: string
-}
+
 // типы для Dialogs
 type DialogsPropsType = {
-    dialogs: DialogsType[]
-    messages: MessagesType[]
+    store:StoreType
 }
 
-export const Dialogs:React.FC<DialogsPropsType> = (props) => {
+export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-    let dialogsElements = props.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
-    let messagesElements = props.messages.map((m) => <Message message={m.message}/>)
-
+    let dialogsElements = props.store._state.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>) // не забудь вынести эти компоненты
+    let messagesElements = props.store._state.dialogsPage.messages.map((m) => <Message message={m.message}/>)  // не забудь вынести эти компоненты
 
 
     // поле ввода для сообщений
     let newPostEl = useRef<HTMLTextAreaElement>(null)
+
+
     // function button onClick
-    const addPost = () => {
-        if (newPostEl.current !== null) {
-            alert(newPostEl.current.value)
-        }
+    const onSendMessageClick = () => {
+        props.store.dispatch(sendMessageActionCreator())
+    }
+
+    // function textarea onChange
+    const onNewMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        let body = event.target.value
+        props.store.dispatch(updateNewMessageBodyActionCreator(body))
     }
 
 
@@ -44,15 +51,19 @@ export const Dialogs:React.FC<DialogsPropsType> = (props) => {
             </div>
 
             <div className={classes.messages}>
-                {messagesElements}
+                <div>{messagesElements}</div>
 
 
                 <div>
-                    <textarea ref={newPostEl}></textarea>
+                    <textarea
+                        ref={newPostEl}
+                        onChange={onNewMessageChange}
+                        placeholder="Enter your message">
+                    </textarea>
                 </div>
 
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onSendMessageClick}>Send</button>
                 </div>
             </div>
         </div>

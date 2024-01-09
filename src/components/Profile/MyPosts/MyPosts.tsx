@@ -26,7 +26,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     // function button onClick
     const addPost = () => {
-        props.dispatch(addPostActionCreator(props.newPostText))  // {type: "ADD-POST", newPostText: props.newPostText}
+        props.dispatch(addPostActionCreator(props.newPostText))
     }
 
     // function add input
@@ -34,7 +34,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
         let text = newPostEl?.current?.value
         console.log(text)
         if (text) {
-            props.dispatch(updateNewPostTextActionCreator(text))  //{type: "UPDATE-NEW-POST-TEXT", newText: text}
+            props.dispatch(updateNewPostTextActionCreator(text))
         }
     }
 

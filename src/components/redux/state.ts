@@ -14,6 +14,7 @@ type DialogsType = {
 type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessageType[]
+    newMessageBody: string  // добавил в типизацию сообщение
 }
 // тип для posts
 type PostType = {
@@ -50,6 +51,8 @@ export type StoreType = {
 export type DispatchActionType =
     ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
+    | ReturnType<typeof updateNewMessageBodyActionCreator>
+    | ReturnType<typeof sendMessageActionCreator>
 
 // написание типов для метода dispatch
 // type AddPostActionType = {
@@ -70,19 +73,33 @@ export type DispatchActionType =
 // // ------------------------------------------------------------------------------
 
 // создание ActionCreator -------------------------------------------------------------------------------
+// это два экшена для добавления users на стену
 export const addPostActionCreator = (newPostText: string) => {
     return {
         type: "ADD-POST",
         newPostText: newPostText
     } as const
 }
-export let updateNewPostTextActionCreator = (newText: string) => {
+export const updateNewPostTextActionCreator = (newText: string) => {
     return {
         type: "UPDATE-NEW-POST-TEXT",
         newText: newText
     } as const
 }
 
+// а тут я напишу два экшена для добавления переписки между пользователями
+export const updateNewMessageBodyActionCreator = (text: string) => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-BODY",
+        body: text
+    } as const
+}
+
+export const sendMessageActionCreator = () => {
+    return {
+        type: "SEND-MESSAGE"
+    } as const
+}
 
 // ----------------------------------------------------------------------------------------------------
 
@@ -112,7 +129,8 @@ export let store: StoreType = {
                 {id: 6, message: "Ой, извини, я не могу найти ответ на этот вопрос. 😕"},
                 {id: 7, message: "Пожалуйста, не стесняйтесь задать мне любой вопрос! 💬"},
                 {id: 8, message: "Спасибо за твою помощь! Я очень благодарен. 🙏"},
-            ]
+            ],
+            newMessageBody: ""  // новое сообщение от users
         },
         sidebar: {}
     },
@@ -131,7 +149,7 @@ export let store: StoreType = {
     // написание реализации метода dispatch
     dispatch(action) {  // { type: "ADD-POST"}
         if (action.type === "ADD-POST") {
-            // // создание нового поста
+            // создание нового поста
             let newPost = {
                 id: 5,
                 messages: action.newPostText,
@@ -145,6 +163,17 @@ export let store: StoreType = {
         } else if (action.type === "UPDATE-NEW-POST-TEXT") {
             // добавление нового поста в state
             this._state.profilePage.newPostText = action.newText
+            this._rerenderEntireTree()
+
+            // создание нового message
+        } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+            this._state.dialogsPage.newMessageBody = action.body
+            this._rerenderEntireTree()
+            // добавление нового message в state
+        } else if (action.type === "SEND-MESSAGE") {
+            let body = this._state.dialogsPage.newMessageBody
+            this._state.dialogsPage.newMessageBody = ""
+            this._state.dialogsPage.messages.push({id: 9, message: body})
             this._rerenderEntireTree()
         }
     }
