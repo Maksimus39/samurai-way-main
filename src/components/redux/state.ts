@@ -1,6 +1,11 @@
 // --------------------------------------------------------------------------
 // сейчас мы тут будем производить типизацию state
 // тип для messages
+import {profilePageReducer} from "./profile-Page-Reduсer";
+import {dialogsPageReducer} from "./dialogs-Page-Reduсer";
+import {sidebarReducer} from "./sidebar-Reducer";
+
+
 type MessageType = {
     id: number
     message: string
@@ -54,25 +59,11 @@ export type DispatchActionType =
     | ReturnType<typeof updateNewMessageBodyActionCreator>
     | ReturnType<typeof sendMessageActionCreator>
 
-// написание типов для метода dispatch
-// type AddPostActionType = {
-//     type: "ADD-POST",
-//     newPostText: string
-// }
+//--------------------------------------------------------------------------------
 
-// type UpdateNewPostTextActionType = {
-//     type: "UPDATE-NEW-POST-TEXT",
-//     newText: string
-// }
-
-// // 1
-// type AddPostActionType = ReturnType<typeof addPostActionCreator>
-//
-// // 2
-// type UpdateNewPostTextActionType =ReturnType<typeof updateNewPostTextActionCreator>
-// // ------------------------------------------------------------------------------
 
 // создание ActionCreator -------------------------------------------------------------------------------
+
 // это два экшена для добавления users на стену
 export const addPostActionCreator = (newPostText: string) => {
     return {
@@ -148,33 +139,14 @@ export let store: StoreType = {
 
     // написание реализации метода dispatch
     dispatch(action) {  // { type: "ADD-POST"}
-        if (action.type === "ADD-POST") {
-            // создание нового поста
-            let newPost = {
-                id: 5,
-                messages: action.newPostText,
-                LikesCounts: 0
-            }
-            // добавление нового поста в state
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = " "
-            this._rerenderEntireTree()
+        // export reducer
 
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            // добавление нового поста в state
-            this._state.profilePage.newPostText = action.newText
-            this._rerenderEntireTree()
+        profilePageReducer(this._state, action)
+        dialogsPageReducer(this._state, action)
+        sidebarReducer(this._state.sidebar, action)
 
-            // создание нового message
-        } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
-            this._state.dialogsPage.newMessageBody = action.body
-            this._rerenderEntireTree()
-            // добавление нового message в state
-        } else if (action.type === "SEND-MESSAGE") {
-            let body = this._state.dialogsPage.newMessageBody
-            this._state.dialogsPage.newMessageBody = ""
-            this._state.dialogsPage.messages.push({id: 9, message: body})
-            this._rerenderEntireTree()
-        }
+        // _rerenderEntireTree
+        this._rerenderEntireTree()
+
     }
 }

@@ -4,18 +4,6 @@ import {NavLink} from "react-router-dom";
 import {sendMessageActionCreator, StoreType, updateNewMessageBodyActionCreator} from "../redux/state";
 
 
-// // типы для Dialogs
-// type DialogsType = {
-//     id: string
-//     name: string
-// }
-//
-// // типы для messages
-// type MessagesType = {
-//     id: number
-//     message: string
-// }
-
 
 // типы для Dialogs
 type DialogsPropsType = {
