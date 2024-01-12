@@ -1,7 +1,7 @@
 import React, {useRef} from "react";
 import classes from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {addPostActionCreator, DispatchActionType, updateNewPostTextActionCreator} from "../../redux/state";
+import {addPostActionCreator, DispatchActionType, updateNewPostTextActionCreator} from "../../redux/store";
 
 
 type PostsType = {

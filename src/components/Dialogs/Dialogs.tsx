@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useRef} from "react";
 import classes from "./Dialogs.module.css"
 import {NavLink} from "react-router-dom";
-import {sendMessageActionCreator, StoreType, updateNewMessageBodyActionCreator} from "../redux/state";
+import {sendMessageActionCreator, StoreType, updateNewMessageBodyActionCreator} from "../redux/store";
 
 
 

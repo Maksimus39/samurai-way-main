@@ -141,12 +141,13 @@ export let store: StoreType = {
     dispatch(action) {  // { type: "ADD-POST"}
         // export reducer
 
-        profilePageReducer(this._state, action)
-        dialogsPageReducer(this._state, action)
-        sidebarReducer(this._state.sidebar, action)
+        profilePageReducer(store._state.profilePage, action)
+        dialogsPageReducer(store._state.dialogsPage, action)
+        sidebarReducer(store._state.sidebar, action)
 
         // _rerenderEntireTree
         this._rerenderEntireTree()
 
     }
 }
+
