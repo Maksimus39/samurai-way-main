@@ -1,19 +1,24 @@
 import React, {ChangeEvent, useRef} from "react";
 import classes from "./Dialogs.module.css"
-import {sendMessageActionCreator, StoreType, updateNewMessageBodyActionCreator} from "../redux/store";
+import {DialogsPageType} from "../redux/store";
 import {DialogItem} from "./DialogItem";
 import {Message} from "./Message";
 
 
 // типы для Dialogs
 type DialogsPropsType = {
-    store:StoreType
+   // store:StoreType
+    dialogsPage:DialogsPageType
+    sendMessage:()=>void
+    updateNewMessageBody:(value:string)=>void
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-    let dialogsElements = props.store._state.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>) // не забудь вынести эти компоненты
-    let messagesElements = props.store._state.dialogsPage.messages.map((m) => <Message message={m.message}/>)  // не забудь вынести эти компоненты
+    let state = props.dialogsPage
+
+    let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>) // не забудь вынести эти компоненты
+    let messagesElements = state.messages.map((m) => <Message message={m.message}/>)  // не забудь вынести эти компоненты
 
 
     // поле ввода для сообщений
@@ -22,13 +27,13 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     // function button onClick
     const onSendMessageClick = () => {
-        props.store.dispatch(sendMessageActionCreator())
+        props.sendMessage()
     }
 
     // function textarea onChange
     const onNewMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let body = event.target.value
-        props.store.dispatch(updateNewMessageBodyActionCreator(body))
+        props.updateNewMessageBody(body)
     }
 
 
@@ -40,7 +45,6 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
             <div className={classes.messages}>
                 <div>{messagesElements}</div>
-
 
                 <div>
                     <textarea

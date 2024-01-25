@@ -11,12 +11,12 @@ type MessageType = {
     message: string
 }
 // тип для dialogs
-type DialogsType = {
+export type DialogsType = {
     id: string
     name: string
 }
 // тип для dialogsPage
-type DialogsPageType = {
+export type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessageType[]
     newMessageBody: string  // добавил в типизацию сообщение
