@@ -1,13 +1,13 @@
 // --------------------------------------------------------------------------
 // сейчас мы тут будем производить типизацию state
 // тип для messages
-import {profilePageReducer} from "./profile-Page-Reduсer";
+import {profilePageReducer, ProfilePageType} from "./profile-Page-Reduсer";
 import {dialogsPageReducer} from "./dialogs-Page-Reduсer";
 import {sidebarReducer} from "./sidebar-Reducer";
 
 
-type MessageType = {
-    id: number
+export type MessageType = {
+    id: string
     message: string
 }
 // тип для dialogs
@@ -22,16 +22,16 @@ export type DialogsPageType = {
     newMessageBody: string  // добавил в типизацию сообщение
 }
 // тип для posts
-type PostType = {
-    id: number
-    messages: string
-    LikesCounts: number
-}
+// export type PostType = {
+//     id: number
+//     messages: string
+//     LikesCounts: number
+// }
 // тип для profilePage
-export type ProfilePageType = {
-    posts: PostType[]
-    newPostText: string
-}
+// export type ProfilePageType = {
+//     posts: PostType[]
+//     newPostText: string
+// }
 // тип для sidebar
 type SideBarType = {}
 // общий тип для state
@@ -112,14 +112,14 @@ export let store: StoreType = {
                 {id: "3", name: "Aleksandr"}
             ],
             messages: [
-                {id: 1, message: " Как твои дела? 😊\n"},
-                {id: 2, message: "Привет"},
-                {id: 3, message: "Я очень рад помочь!"},
-                {id: 4, message: "Чем я могу быть полезен? 🤔"},
-                {id: 5, message: "Ура! У меня получилось! 🎉"},
-                {id: 6, message: "Ой, извини, я не могу найти ответ на этот вопрос. 😕"},
-                {id: 7, message: "Пожалуйста, не стесняйтесь задать мне любой вопрос! 💬"},
-                {id: 8, message: "Спасибо за твою помощь! Я очень благодарен. 🙏"},
+                {id: "1", message: " Как твои дела? 😊\n"},
+                {id: "2", message: "Привет"},
+                {id: "3", message: "Я очень рад помочь!"},
+                {id: "4", message: "Чем я могу быть полезен? 🤔"},
+                {id: "5", message: "Ура! У меня получилось! 🎉"},
+                {id: "6", message: "Ой, извини, я не могу найти ответ на этот вопрос. 😕"},
+                {id: "7", message: "Пожалуйста, не стесняйтесь задать мне любой вопрос! 💬"},
+                {id: "8", message: "Спасибо за твою помощь! Я очень благодарен. 🙏"},
             ],
             newMessageBody: ""  // новое сообщение от users
         },
