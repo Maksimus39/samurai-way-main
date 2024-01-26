@@ -7,7 +7,6 @@ import {Message} from "./Message";
 
 // типы для Dialogs
 type DialogsPropsType = {
-   // store:StoreType
     dialogsPage:DialogsPageType
     sendMessage:()=>void
     updateNewMessageBody:(value:string)=>void
