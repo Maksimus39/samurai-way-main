@@ -8,21 +8,10 @@ import {store} from "./components/redux/redux-store";
 
 
 
-
-
-
-export const rerenderEntireTree = () => {
-    ReactDOM.render(
-        <BrowserRouter>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </BrowserRouter>, document.getElementById('root')
-    );
-}
-
-rerenderEntireTree()
-
-store.subscribe(() => {
-    rerenderEntireTree()
-})
+ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>, document.getElementById('root')
+);

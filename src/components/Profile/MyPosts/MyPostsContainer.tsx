@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         updateNewPostText: (text: string) => {
             dispatch(updateNewPostTextActionCreator(text))
         },
-        addPost:()=>{
+        addPost: () => {
             dispatch(addPostActionCreator(store._state.profilePage.newPostText))
         }
     }

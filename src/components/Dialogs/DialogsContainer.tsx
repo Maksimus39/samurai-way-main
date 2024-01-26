@@ -13,8 +13,8 @@ type MapStatePropsType = {
 
 // type mapDispatchToProps
 type MapDispatchPropsType = {
-    updateNewMessageBody: () => void
-    sendMessage: (body: string) => void
+    updateNewMessageBody: (body: string) => void
+    sendMessage: () => void
 }
 
 export type DialogsPropsType = MapStatePropsType & MapDispatchPropsType
@@ -29,11 +29,11 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
-        updateNewMessageBody: () => {
-            dispatch(sendMessageActionCreator())
-        },
-        sendMessage: (body: string) => {
+        updateNewMessageBody: (body: string) => {
             dispatch(updateNewMessageBodyActionCreator(body))
+        },
+        sendMessage: () => {
+            dispatch(sendMessageActionCreator())
         }
     }
 }

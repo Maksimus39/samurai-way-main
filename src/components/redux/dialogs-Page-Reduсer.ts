@@ -1,7 +1,6 @@
 import {DialogsType, DispatchActionType, MessageType} from "./store";
 
 
-
 // типизация для редюсера ------- это я добавляю типизацию к редюсеру
 export type DialogsPageType = {
     dialogs: DialogsType[]
@@ -28,25 +27,20 @@ let initialState: DialogsPageType = {
     ],
     newMessageBody: ""  // новое сообщение от users
 }
-
 // ------------------------------------------------------------------------------------------
 
-
 // reducer dialogs-Page-Reducer
-export const dialogsPageReducer = (state:DialogsPageType = initialState, action: DispatchActionType):DialogsPageType => {
+export const dialogsPageReducer = (state: DialogsPageType = initialState, action: DispatchActionType): DialogsPageType => {
     // создание нового message
 
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
-            state.newMessageBody = action.body;
-            return state
+            return {...state, newMessageBody: action.body}
 
         case "SEND-MESSAGE":
             let body = state.newMessageBody;
-            state.newMessageBody = "";
-            state.messages.push({id: "9", message: body});
-            return state
-
+            return {...state,newMessageBody:"",messages: [...state.messages, {id: "9", message: body}]
+            }
         default:
             return state
     }

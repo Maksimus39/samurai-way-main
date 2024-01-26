@@ -21,17 +21,7 @@ export type DialogsPageType = {
     messages: MessageType[]
     newMessageBody: string  // добавил в типизацию сообщение
 }
-// тип для posts
-// export type PostType = {
-//     id: number
-//     messages: string
-//     LikesCounts: number
-// }
-// тип для profilePage
-// export type ProfilePageType = {
-//     posts: PostType[]
-//     newPostText: string
-// }
+
 // тип для sidebar
 type SideBarType = {}
 // общий тип для state

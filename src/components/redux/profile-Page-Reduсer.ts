@@ -23,10 +23,8 @@ const initialState = {
 // ------------------------------------------------------------------------------------
 export type InitialStateType = typeof initialState
 
-
-
 // reducer profile-Page-Reducer
-export const profilePageReducer = (state:InitialStateType = initialState, action: DispatchActionType):InitialStateType => {
+export const profilePageReducer = (state: InitialStateType = initialState, action: DispatchActionType): InitialStateType => {
     switch (action.type) {
         case "ADD-POST": {
             // создание нового поста
@@ -36,14 +34,10 @@ export const profilePageReducer = (state:InitialStateType = initialState, action
                 LikesCounts: 0
             };
             // добавление нового поста в state
-            state.posts.push(newPost);
-            state.newPostText = " ";
-            return state
+            return {...state, posts: [...state.posts, newPost], newPostText: ""}
         }
         case "UPDATE-NEW-POST-TEXT": {
-            // добавление нового поста в state
-            state.newPostText = action.newText;
-            return state
+            return {...state, newPostText: action.newText}
         }
         default:
             return state

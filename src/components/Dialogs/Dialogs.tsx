@@ -5,20 +5,13 @@ import {Message} from "./Message";
 import {DialogsPropsType} from "./DialogsContainer";
 
 
-// типы для Dialogs
-// type DialogsPropsType = {
-//     dialogsPage:DialogsPageType
-//     sendMessage:()=>void
-//     updateNewMessageBody:(value:string)=>void
-// }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     let state = props.dialogsPage
 
-    let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>) // не забудь вынести эти компоненты
-    let messagesElements = state.messages.map((m) => <Message message={m.message}/>)  // не забудь вынести эти компоненты
-
+    let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>) // не забудь вынести эти компоненты
+    let messagesElements = state.messages.map((m) => <Message message={m.message} key={m.id}/>)  // не забудь вынести эти компоненты
 
     // поле ввода для сообщений
     let newPostEl = useRef<HTMLTextAreaElement>(null)
@@ -34,7 +27,6 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
         let body = event.target.value
         props.updateNewMessageBody(body)
     }
-
 
     return (
         <div className={classes.dialogs}>
