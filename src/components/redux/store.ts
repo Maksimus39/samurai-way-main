@@ -4,7 +4,13 @@
 import {profilePageReducer, ProfilePageType} from "./profile-Page-Reduсer";
 import {dialogsPageReducer} from "./dialogs-Page-Reduсer";
 import {sidebarReducer} from "./sidebar-Reducer";
-import {followActionCreator, unfollowActionCreator, usersReducer, UsersType} from "./users-Reduсer";
+import {
+    followActionCreator,
+    setUsersActionCreator,
+    unfollowActionCreator,
+    usersReducer,
+    UserType
+} from "./users-Reduсer";
 
 
 export type MessageType = {
@@ -33,8 +39,8 @@ export type RootStateType = {
     dialogsPage: DialogsPageType
     sidebar: SideBarType
     // new state
-    usersReducer: {
-        users:  UsersType[]
+    usersPage: {
+        users: UserType[]
     }
 }
 
@@ -59,6 +65,7 @@ export type DispatchActionType =
     // добавил два экшен креэйтора
     | ReturnType<typeof followActionCreator>
     | ReturnType<typeof unfollowActionCreator>
+    | ReturnType<typeof setUsersActionCreator>
 
 //--------------------------------------------------------------------------------
 
@@ -125,7 +132,7 @@ export let store: StoreType = {
             newMessageBody: ""  // новое сообщение от users
         },
         sidebar: {},
-        usersReducer: {
+        usersPage: {
             users: [
                 {
                     id: 1,
@@ -170,7 +177,7 @@ export let store: StoreType = {
         profilePageReducer(store._state.profilePage, action)
         dialogsPageReducer(store._state.dialogsPage, action)
         sidebarReducer(store._state.sidebar, action)
-        usersReducer(store._state.usersReducer, action)
+        usersReducer(store._state.usersPage, action)
 
         // _rerenderEntireTree
         this._rerenderEntireTree()
