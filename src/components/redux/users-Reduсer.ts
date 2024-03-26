@@ -22,9 +22,9 @@ export type InitialStateType = {
 
 const initialState:InitialStateType = {
     users: [
-        {id: 1, followed: true, fullName: "Max", status: "I am boss", location: {city: "Kiev", country: "Russia"}},
-        {id: 2, followed: true, fullName: "Andrey", status: "I am boss", location: {city: "Moscow", country: "Russia"}},
-        {id: 3, followed: false, fullName: "Victor", status: "I am boss", location: {city: "Sochi", country: "Russia"}},
+        // {id: 1, followed: true, fullName: "Max", status: "I am boss", location: {city: "Kiev", country: "Russia"}},
+        // {id: 2, followed: true, fullName: "Andrey", status: "I am boss", location: {city: "Moscow", country: "Russia"}},
+        // {id: 3, followed: false, fullName: "Victor", status: "I am boss", location: {city: "Sochi", country: "Russia"}},
     ] as UserType[]
 }
 

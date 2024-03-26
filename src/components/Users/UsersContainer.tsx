@@ -9,13 +9,13 @@ import {
 } from "../redux/users-Reduсer";
 import {AppStateType} from "../redux/redux-store";
 import {Dispatch} from "redux";
-import users from "./Users";
+
 
 
 
 
 type MapStateToPropsType = {
-    usersPage: InitialStateType
+    users: UserType[]
 }
 
 type MapDispatchPropsType = {
@@ -26,7 +26,7 @@ type MapDispatchPropsType = {
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        usersPage: state.usersPage
+       users:state.usersPage.users
     }
 }
 
